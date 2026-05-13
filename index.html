@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kanji Practice</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar card">
+        <div class="brand-block">
+          <div class="brand-mark">漢</div>
+          <div>
+            <p class="eyebrow">Kanji Practice</p>
+            <h1>Study like an app, not a settings panel</h1>
+          </div>
+        </div>
+
+        <nav class="section-nav">
+          <button id="homeSectionBtn" class="section-btn active">🏠 Home</button>
+          <button id="studySectionBtn" class="section-btn">💫 Study</button>
+          <button id="writeSectionBtn" class="section-btn">✍️ Write Focus</button>
+          <button id="readingSectionBtn" class="section-btn">📖 Reading</button>
+          <button id="reviewSectionBtn" class="section-btn">🌈 Review</button>
+        </nav>
+
+        <section class="sidebar-group">
+          <div class="group-heading-row">
+            <div>
+              <p class="group-kicker">Source</p>
+              <h2>Decks</h2>
+            </div>
+            <select id="sourceSelect" class="visually-hidden"></select>
+          </div>
+          <div id="sourcePills" class="pill-row"></div>
+        </section>
+
+        <section class="sidebar-group">
+          <div class="group-heading-row">
+            <div>
+              <p class="group-kicker">Chapters</p>
+              <p id="chapterSummary" class="group-copy"></p>
+            </div>
+            <div class="chapter-actions">
+              <button id="selectAllChaptersBtn" class="secondary compact">All</button>
+              <button id="clearChaptersBtn" class="secondary compact">Clear</button>
+            </div>
+          </div>
+          <div id="chapterList" class="chapter-list chip-grid"></div>
+        </section>
+
+        <section class="sidebar-group">
+          <div class="group-heading-row">
+            <div>
+              <p class="group-kicker">Quick stats</p>
+              <h2>Progress</h2>
+            </div>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-card"><span>Seen</span><strong id="seenCount">0</strong></div>
+            <div class="stat-card"><span>Correct</span><strong id="correctCount">0</strong></div>
+            <div class="stat-card"><span>Accuracy</span><strong id="accuracy">0%</strong></div>
+            <div class="stat-card"><span>Streak</span><strong id="streak">0</strong></div>
+            <div class="stat-card"><span>Study days</span><strong id="studyDays">0</strong></div>
+            <div class="stat-card"><span>Due cards</span><strong id="dueCount">0</strong></div>
+          </div>
+        </section>
+      </aside>
+
+      <main class="main-column">
+        <section class="hero card">
+          <div>
+            <p id="heroEyebrow" class="eyebrow">Home</p>
+            <h2 id="heroTitle">Pick a lane and keep moving</h2>
+            <p id="heroCopy" class="hero-copy">Jump into quick recall, writing-heavy drills, reading passages, or a review-first session.</p>
+          </div>
+          <button id="shuffleBtn" class="compact">✨ Shuffle session</button>
+        </section>
+
+        <section id="homePanel" class="page-panel">
+          <div class="home-grid">
+            <section class="card home-card modes-card">
+              <div class="panel-heading">
+                <div>
+                  <p class="group-kicker">Modes</p>
+                  <h3>Choose your session</h3>
+                </div>
+              </div>
+              <div id="modeCards" class="mode-card-grid"></div>
+            </section>
+
+            <section class="card home-card filters-card">
+              <div class="panel-heading">
+                <div>
+                  <p class="group-kicker">Question style</p>
+                  <h3>Prompt direction</h3>
+                </div>
+              </div>
+              <select id="modeSelect" class="visually-hidden">
+                <option value="flashcard">Flashcards</option>
+                <option value="quiz">4-choice quiz</option>
+                <option value="writing">Writing mode</option>
+                <option value="review">Self-rated review</option>
+              </select>
+              <select id="questionType" class="visually-hidden">
+                <option value="kanji-to-meaning">Kanji → meaning</option>
+                <option value="kanji-to-reading">Kanji → reading</option>
+                <option value="meaning-to-kanji">Meaning → kanji</option>
+                <option value="reading-to-kanji">Reading → kanji</option>
+                <option value="mixed">Mixed random</option>
+              </select>
+              <select id="reviewFilter" class="visually-hidden">
+                <option value="all">All cards</option>
+                <option value="due">Review first</option>
+                <option value="new">Newer cards first</option>
+              </select>
+              <div class="stack-gap">
+                <div>
+                  <p class="mini-label">Question type</p>
+                  <div id="questionTypePills" class="pill-row"></div>
+                </div>
+                <div>
+                  <p class="mini-label">Card filter</p>
+                  <div id="reviewFilterPills" class="pill-row"></div>
+                </div>
+              </div>
+            </section>
+
+            <section class="card home-card overview-card">
+              <div class="panel-heading">
+                <div>
+                  <p class="group-kicker">Session overview</p>
+                  <h3>What this setup gives you</h3>
+                </div>
+              </div>
+              <div class="session-summary-block">
+                <div class="session-summary-copy">
+                  <p class="mini-label">Session readiness</p>
+                  <strong id="sessionSummaryLabel">Ready to start</strong>
+                  <p id="sessionSummaryCopy" class="session-summary-text">Pick a lane, confirm your chapters, and jump in.</p>
+                </div>
+                <div class="session-progress">
+                  <div class="session-progress-track">
+                    <span id="sessionProgressFill" class="session-progress-fill"></span>
+                  </div>
+                  <div class="session-progress-meta">
+                    <strong id="sessionProgressValue">0%</strong>
+                    <span id="sessionDueSummary">0 due now</span>
+                  </div>
+                </div>
+              </div>
+              <div class="overview-list">
+                <div><span>Source</span><strong id="homeSourceSummary">—</strong></div>
+                <div><span>Chapters</span><strong id="homeChapterSummary">—</strong></div>
+                <div><span>Study lane</span><strong id="homeModeSummary">—</strong></div>
+                <div><span>Ready now</span><strong id="homeCardSummary">—</strong></div>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section id="practicePanel" class="page-panel hidden">
+          <section id="studyControlsPanel" class="card study-controls-panel hidden">
+            <div class="panel-heading">
+              <div>
+                <p class="group-kicker">Study setup</p>
+                <h3>How do you want to study?</h3>
+              </div>
+            </div>
+            <div class="study-controls-grid">
+              <div class="study-control-block">
+                <p class="mini-label">Study mode</p>
+                <div id="studyModePills" class="pill-row"></div>
+              </div>
+              <div class="study-control-block">
+                <p class="mini-label">Question type</p>
+                <div id="studyQuestionTypePills" class="pill-row"></div>
+              </div>
+              <div class="study-control-block">
+                <p class="mini-label">Card filter</p>
+                <div id="studyReviewFilterPills" class="pill-row"></div>
+              </div>
+            </div>
+          </section>
+
+          <div class="content-frame">
+            <main class="card practice-area">
+              <div id="emptyState" class="empty-state hidden">
+                <h3>No cards in the current selection yet</h3>
+                <p>Try another source, add more chapters, or switch to a different study lane.</p>
+              </div>
+
+              <div id="practiceContent" class="practice-stack">
+                <div id="practiceStatus" class="practice-status" aria-live="polite"></div>
+                <div id="promptLabel" class="prompt-label"></div>
+                <div id="prompt" class="prompt"></div>
+                <div id="metaLine" class="meta-line"></div>
+
+                <div id="flashcardArea">
+                  <div id="flashcardAnswer" class="answer hidden"></div>
+                  <div class="flashcard-buttons stable-actions">
+                    <button id="showAnswerBtn" type="button">Show answer</button>
+                    <button id="hardBtn" type="button" class="secondary">Hard</button>
+                    <button id="easyBtn" type="button" class="secondary">Easy</button>
+                    <button id="skipBtn" type="button" class="secondary">Skip</button>
+                  </div>
+                </div>
+
+                <div id="quizArea" class="hidden">
+                  <div id="choices" class="choices"></div>
+                  <div class="quiz-actions stable-actions">
+                    <button id="skipQuizBtn" type="button" class="secondary">Skip</button>
+                  </div>
+                  <div id="quizFeedback" class="feedback" aria-live="polite"></div>
+                </div>
+
+                <div id="writingArea" class="hidden writing-area">
+                  <input id="writingInput" type="text" autocomplete="off" placeholder="Type your answer" />
+                  <div class="writing-buttons stable-actions">
+                    <button id="checkWritingBtn" type="button">Check</button>
+                    <button id="showWritingAnswerBtn" type="button" class="secondary">Show answer</button>
+                    <button id="skipWritingBtn" type="button" class="secondary">Skip</button>
+                  </div>
+                  <div id="writingFeedback" class="feedback" aria-live="polite"></div>
+                </div>
+
+                <div id="reviewArea" class="hidden">
+                  <div class="answer-stage">
+                    <div id="reviewAnswer" class="answer"></div>
+                  </div>
+                  <div class="flashcard-buttons stable-actions">
+                    <button id="againBtn" type="button" class="secondary">Again</button>
+                    <button id="goodBtn" type="button" class="secondary">Good</button>
+                    <button id="perfectBtn" type="button">Perfect</button>
+                    <button id="skipReviewBtn" type="button" class="secondary">Skip</button>
+                  </div>
+                </div>
+              </div>
+
+              <div id="readingContent" class="reading-content hidden">
+                <div id="readingEmptyState" class="empty-state hidden">
+                  <h3>No reading passages in the current selection yet</h3>
+                  <p>Select a different source/chapter to load a passage.</p>
+                </div>
+
+                <div id="readingView" class="reading-view hidden">
+                  <section class="reading-sidebar">
+                    <div class="reading-sidebar-header">
+                      <div>
+                        <div class="reading-kicker">Reading passages</div>
+                        <h3 id="readingPassageTitle" class="reading-passage-title"></h3>
+                      </div>
+                      <label class="reading-toggle">
+                        <input id="showAllReadingsToggle" type="checkbox" />
+                        <span>Show all readings</span>
+                      </label>
+                    </div>
+                    <p id="readingPassageMeta" class="reading-passage-meta"></p>
+                    <div id="readingPassageList" class="reading-passage-list"></div>
+                  </section>
+
+                  <article class="reading-passage card">
+                    <p id="readingInstructions" class="reading-instructions"></p>
+                    <div id="readingPassageBody" class="reading-passage-body"></div>
+                    <p id="readingPassageGloss" class="reading-passage-gloss"></p>
+                  </article>
+                </div>
+              </div>
+            </main>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
