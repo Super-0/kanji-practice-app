@@ -1,30 +1,38 @@
 # Kanji Practice App
 
-A polished browser-based kanji study app built for focused self-study sessions. It combines flashcards, quizzes, writing prompts, reading practice, and lightweight spaced review in a single responsive interface.
+A browser-based kanji study app designed to feel more like a polished product than a simple flashcard page. It combines multiple study modes, chapter-based deck selection, reading practice, and persistent progress tracking in a single local-first interface.
 
-## Why this project exists
+## Overview
 
-I wanted a study tool that felt closer to a real app than a barebones flashcard page. The result is a local-first interface designed to make switching between quick recall, writing-heavy practice, and reading review feel fast and natural.
+This project was built to make self-study sessions faster to start and easier to stick with. Instead of splitting practice across separate tools, the app brings recall drills, writing-focused prompts, and reading review into one responsive UI.
 
-## Features
+## Highlights
 
-- Single-page app interface with a desktop-style layout
-- Multiple study modes: flashcards, four-choice quiz, writing, and self-rated review
-- Deck grouping by source and chapter
-- Reading practice mode with passage support
-- Lightweight spaced-review behavior
+- Desktop-style single-page interface with a focused study layout
+- Multiple study modes: flashcards, four-choice quiz, writing mode, and self-rated review
+- Chapter-based deck organization by learning source
+- Reading practice view for passage-based study
 - Progress tracking with streaks, accuracy, due counts, and study-day stats
-- Local-first persistence using browser storage
-- No framework dependency — built with plain HTML, CSS, and JavaScript
+- Lightweight spaced-review behavior for repeated practice
+- Local-first persistence with browser `localStorage`
+- Built with plain HTML, CSS, and JavaScript — no framework or build step required
 
-## Tech stack
+## Tech Stack
 
 - HTML
 - CSS
 - JavaScript
-- Browser `localStorage` for persistent progress
+- Browser `localStorage`
 
-## Project structure
+## What This Project Demonstrates
+
+- Frontend product thinking and UI/UX iteration
+- State management in vanilla JavaScript
+- Designing multi-mode interactive learning flows
+- Persisting user progress without a backend
+- Structuring a self-contained web app with no framework dependency
+
+## Project Structure
 
 ```text
 kanji-practice-app/
@@ -34,9 +42,9 @@ kanji-practice-app/
 └── README.md
 ```
 
-## Run locally
+## Run Locally
 
-Because the app uses browser modules/assets locally, the easiest way to test it is with a simple static server:
+Serve the directory with a simple static server:
 
 ```bash
 cd kanji-practice-app
@@ -49,21 +57,20 @@ Then open:
 http://127.0.0.1:8000
 ```
 
-## What this demonstrates
+## Key Design Choices
 
-- Product-minded frontend design
-- State management without a framework
-- Interactive study workflows and mode switching
-- UX polish for a real repeated-use tool
-- Local persistence and progress tracking
+- **Single-file app logic:** keeps the project easy to run and review for a portfolio setting
+- **Local-first persistence:** progress is stored in the browser, so the app works without account setup or external services
+- **Mode-based study flow:** supports quick recall, multiple-choice practice, writing-focused review, and reading exposure in one interface
+- **Structured content model:** decks are grouped by source and chapter to support targeted studying instead of one large undifferentiated list
 
-## Future improvements
+## Possible Next Steps
 
-- Import/export for custom decks
-- Better writing evaluation
-- More advanced spaced repetition rules
-- Expanded content packs
+- Import/export support for custom decks
+- More advanced spaced repetition logic
+- Better writing evaluation and feedback
+- Additional study content packs
 
-## Notes
+## Portfolio Note
 
-This repo is the cleaned public version of the project, prepared for portfolio use.
+This repository is the cleaned public version of the project, prepared for portfolio use.
