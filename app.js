@@ -2419,7 +2419,7 @@ ch13: { label: 'Chapter 13', cards: [
       },
       ch10: {
         label: 'Chapter 10',
-        sourceNote: 'Rebuilt from manually curated Chapter 10 study notes. Only the visible study entries were kept. studyType mapping used: ◆ = write, ◇ = read-only.',
+        sourceNote: 'Rebuilt from Ben-provided Quartet II Chapter 10 screenshots on 2026-03-25. Only diamond-marked study entries visible in the screenshots were kept. studyType mapping used: ◆ = write, ◇ = read-only.',
         cards: [
           { kanji: '実施(する)', meaning: 'to carry out', reading: 'じっし(する)', studyType: 'read-only' },
           { kanji: '未婚者', meaning: 'unmarried person', reading: 'みこんしゃ', studyType: 'read-only' },
@@ -3370,10 +3370,10 @@ function renderChoicePills(container, options, currentValue, onSelect) {
 
 function renderModeCards() {
   const cards = [
-    { key: 'flashcard', title: 'Flashcards', copy: 'Fast recognition and reveal with focused repetition.', tag: 'Quick reps', lane: 'Study lane' },
-    { key: 'quiz', title: 'Quiz', copy: 'Multiple choice with instant feedback and momentum.', tag: 'Decision speed', lane: 'Study lane' },
-    { key: 'writing', title: 'Write Focus', copy: 'Type the answer and lock in active recall.', tag: 'Production', lane: 'Write lane' },
-    { key: 'review', title: 'Review', copy: 'Self-rate, clear due cards, and keep your queue under control.', tag: 'Due-first', lane: 'Review lane' },
+    { key: 'flashcard', title: 'Flashcards', copy: 'Fast recognition and reveal with cute little reps.', icon: '🫧', tag: 'Quick reps', lane: 'Study lane' },
+    { key: 'quiz', title: 'Quiz', copy: 'Multiple choice with instant feedback and momentum.', icon: '🎯', tag: 'Decision speed', lane: 'Study lane' },
+    { key: 'writing', title: 'Write Focus', copy: 'Type the answer and lock in active recall.', icon: '✍️', tag: 'Production', lane: 'Write lane' },
+    { key: 'review', title: 'Review', copy: 'Self-rate, clear due cards, and keep the streak cozy.', icon: '🌈', tag: 'Due-first', lane: 'Review lane' },
   ];
   els.modeCards.innerHTML = '';
   cards.forEach(card => {
@@ -3381,6 +3381,7 @@ function renderModeCards() {
     btn.className = `mode-card${state.mode === card.key ? ' active' : ''}`;
     btn.innerHTML = `
       <div class="mode-card-head">
+        <span class="mode-card-icon" aria-hidden="true">${card.icon}</span>
         <span class="mode-card-status">${state.mode === card.key ? 'Current mode' : 'Available'}</span>
       </div>
       <div>
@@ -3406,11 +3407,11 @@ function renderModeCards() {
 
 function syncHero() {
   const map = {
-    home: ['Home', 'Pick your study lane', 'Move between quick recall, writing drills, reading passages, or a review session.'],
-    study: ['Study', 'Focused study sprint', 'Use flashcards or quizzes with your current deck and chapter stack.'],
-    write: ['Write Focus', 'Kanji production time', 'Surface the write-tagged items and keep the answer flow direct and clear.'],
-    reading: ['Reading', 'Passage practice', 'Read short passages, reveal readings when needed, and stay in the same chapter lane.'],
-    review: ['Review', 'Reset your due cards', 'Self-rate answers and clear the cards that need extra attention.'],
+    home: ['Home', 'Pick your study vibe ✨', 'Bounce between quick recall, writing drills, reading passages, or a gentle review session.'],
+    study: ['Study', 'Cute little study sprint', 'Use flashcards or quizzes with your current deck and chapter stack.'],
+    write: ['Write Focus', 'Kanji production time', 'Surface the write-tagged items and keep the answer flow nice and snappy.'],
+    reading: ['Reading', 'Passage practice', 'Read short passages, reveal readings when needed, and stay cozy in the same chapter lane.'],
+    review: ['Review', 'Soft reset for due cards', 'Self-rate answers and clear the cards asking for a little extra love.'],
   };
   const [eyebrow, title, copy] = map[state.section];
   els.heroEyebrow.textContent = eyebrow;
@@ -3576,7 +3577,7 @@ function renderQuiz() {
       const ok = card.kanji === state.current.kanji;
       scoreCard(state.current, ok);
       btn.classList.add(ok ? 'correct' : 'wrong');
-      els.quizFeedback.textContent = ok ? 'Correct' : `Not quite — answer: ${choiceValue(state.current)}`;
+      els.quizFeedback.textContent = ok ? 'Correct ✨' : `Not quite — answer: ${choiceValue(state.current)}`;
       setTimeout(nextCard, 900);
     });
     els.choices.appendChild(btn);
@@ -3665,10 +3666,10 @@ function initSourceSelector() {
 
 function initControls() {
   const studyModeOptions = [
-    { value: 'flashcard', label: 'Flashcards' },
-    { value: 'quiz', label: 'Quiz' },
-    { value: 'writing', label: 'Write focus' },
-    { value: 'review', label: 'Review' },
+    { value: 'flashcard', label: '🫧 Flashcards' },
+    { value: 'quiz', label: '🎯 Quiz' },
+    { value: 'writing', label: '✍️ Write focus' },
+    { value: 'review', label: '🌈 Review' },
   ];
   const questionTypeOptions = [
     { value: 'kanji-to-meaning', label: 'Kanji → meaning' },
@@ -3780,7 +3781,7 @@ els.skipReviewBtn.addEventListener('click', skipCard);
 els.checkWritingBtn.addEventListener('click', () => {
   const ok = compareWritingInput(els.writingInput.value, state.current);
   scoreCard(state.current, ok);
-  els.writingFeedback.textContent = ok ? 'Correct' : `Not quite — answer: ${promptFor(state.current).answer}`;
+  els.writingFeedback.textContent = ok ? 'Correct ✨' : `Not quite — answer: ${promptFor(state.current).answer}`;
   setTimeout(nextCard, 1100);
 });
 els.showWritingAnswerBtn.addEventListener('click', () => {
